@@ -12,9 +12,9 @@ public class Camera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        offset.x = 2.0f;
+        offset.x = 4.0f;
         offset.y = 0.0f;
-        offset.z = 2.0f;
+        offset.z = 0.0f;
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class Camera : MonoBehaviour
         Vector3 CurrentPos = transform.position;
         Vector3 NewPos = planets[currentPlanet].transform.position + offset;
         
-        transform.position = Vector3.Lerp(CurrentPos, NewPos, 0.3f);
+        transform.position = Vector3.Lerp(CurrentPos, NewPos, 0.10f);
         
     }
 }
