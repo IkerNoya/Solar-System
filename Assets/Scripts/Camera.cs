@@ -22,11 +22,11 @@ public class Camera : MonoBehaviour
     {
 
         timer += Time.deltaTime;
-        if (timer>timerLimit)
+        if (timer > timerLimit)
         {
             timer = 0;
             currentPlanet++;
-            if (currentPlanet>=planets.Length)
+            if (currentPlanet >= planets.Length)
             {
                 currentPlanet = 0;
                 timer = 0;
@@ -34,7 +34,8 @@ public class Camera : MonoBehaviour
         }
         Vector3 CurrentPos = transform.position;
         Vector3 NewPos = planets[currentPlanet].transform.position + offset;
-        transform.position = NewPos; 
+        
+        transform.position = Vector3.Lerp(CurrentPos, NewPos, 0.3f);
         
     }
 }
