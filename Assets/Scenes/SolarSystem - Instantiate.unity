@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -145,8 +146,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745521576}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -209,7 +211,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1027048722
 GameObject:
@@ -222,6 +224,7 @@ GameObject:
   - component: {fileID: 1027048725}
   - component: {fileID: 1027048724}
   - component: {fileID: 1027048723}
+  - component: {fileID: 1027048726}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -294,75 +297,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1470952606
-PrefabInstance:
+--- !u!114 &1027048726
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3174384055892485610, guid: ec367bedb44f2124d86d08b15134728a,
-        type: 3}
-      propertyPath: m_Name
-      value: Sun
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174384055892485606, guid: ec367bedb44f2124d86d08b15134728a,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174384055892485606, guid: ec367bedb44f2124d86d08b15134728a,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174384055892485606, guid: ec367bedb44f2124d86d08b15134728a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 13.704938
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174384055892485606, guid: ec367bedb44f2124d86d08b15134728a,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174384055892485606, guid: ec367bedb44f2124d86d08b15134728a,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174384055892485606, guid: ec367bedb44f2124d86d08b15134728a,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174384055892485606, guid: ec367bedb44f2124d86d08b15134728a,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174384055892485606, guid: ec367bedb44f2124d86d08b15134728a,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174384055892485606, guid: ec367bedb44f2124d86d08b15134728a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174384055892485606, guid: ec367bedb44f2124d86d08b15134728a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3174384055892485606, guid: ec367bedb44f2124d86d08b15134728a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ec367bedb44f2124d86d08b15134728a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027048722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f68457fabfe98439c9aef9f408ac39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerLimit: 3
+  planets: []
+  offset: {x: 0, y: 0, z: 0}
+  camSpeed: 1
 --- !u!1 &1916779971
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,10 +342,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0823031f5962f54096af21afc3027ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  PlanetPrefab: {fileID: 0}
-  PlanetMaterial: []
+  cam: {fileID: 1027048726}
+  PlanetPrefab: {fileID: -8163675265373632074, guid: b3fddb9c832c1fc4aad23a23981496f2,
+    type: 3}
+  PlanetMaterial:
+  - {fileID: 2100000, guid: c9123277561b92643a074d33c58548d1, type: 2}
+  - {fileID: 2100000, guid: 47154ff6ee5b30f4da4d16d6939366f3, type: 2}
+  - {fileID: 2100000, guid: 8b5dded8ec57a4847b2cad2fafaee65c, type: 2}
+  planetMaterialsAsArray: []
   createPlanets: []
+  from: {x: 0, y: 0, z: 0}
+  to: {x: 0, y: 0, z: 0}
 --- !u!4 &1916779973
 Transform:
   m_ObjectHideFlags: 0
@@ -404,9 +361,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916779971}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.90344, y: 6.4395447, z: 22.975555}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

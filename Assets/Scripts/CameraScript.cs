@@ -2,40 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class CameraScript : MonoBehaviour
 {
     float timer = 0;
     public float timerLimit = 3.0f;
-    public GameObject[] planets;
+    public List<GameObject> planets = new List<GameObject>();
     int currentPlanet = 0;
     public Vector3 offset;
+    public float camSpeed = 1;
+
+    private Vector3 lastCamPos;
     // Start is called before the first frame update
     void Start()
     {
-        offset.x = 4.0f;
-        offset.y = 0.0f;
-        offset.z = 0.0f;
+        
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
+        if (planets.Count<=0)
+        {
+            return;
+        }
 
         timer += Time.deltaTime;
+
         if (timer > timerLimit)
         {
             timer = 0;
             currentPlanet++;
-            if (currentPlanet >= planets.Length)
-            {
-                currentPlanet = 0;
-                timer = 0;
-            }
+            currentPlanet = currentPlanet % planets.Count;
+            timer = 0;
+            lastCamPos = transform.position;
         }
-        Vector3 CurrentPos = transform.position;
         Vector3 NewPos = planets[currentPlanet].transform.position + offset;
-        
-        transform.position = Vector3.Lerp(CurrentPos, NewPos, 0.10f);
+
+        transform.position = Vector3.Lerp(transform.position, NewPos, camSpeed * Time.deltaTime);
         
     }
 }

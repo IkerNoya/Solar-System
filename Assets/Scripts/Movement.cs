@@ -5,45 +5,42 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 
-	public float speed = 1;
-	public float rotationSpeed = 1;
+    public float speed = 1;
+    public float rotationSpeed = 1;
 
-	void Update()
-	{
-		float hor = Input.GetAxis("Horizontal"); //0.0000000000001 [-1,1] //0  ~0
-		float ver = Input.GetAxis("Vertical");
+    void Update()
+    {
+        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");     
+        Vector3 movement = new Vector3(horizontal, 0, vertical) * speed;
+        transform.position += movement * Time.deltaTime;
 
-		Vector3 movement = new Vector3(hor, 0, ver) * speed;
-		transform.position += movement * Time.deltaTime;
+        Vector3 currentPos = transform.position;
+        Vector3 wantedPos = transform.position + movement * Time.deltaTime;
 
-		Vector3 lastPosition = transform.position;
+        float realAngle = RealAngle(currentPos, wantedPos);
 
-		Vector3 wantedPosition = transform.position + movement * Time.deltaTime;
+        Quaternion currentRotation = transform.rotation;
+        Quaternion newRotation = Quaternion.Euler(0, realAngle, 0);
+        Quaternion result = Quaternion.Slerp(currentRotation, newRotation, rotationSpeed * Time.deltaTime);
 
-		float anguloReal = RealAngle(lastPosition, wantedPosition);
+        if (Mathf.Abs(horizontal) > 0.001f || Mathf.Abs(vertical) > 0.001f)
+        {
+            transform.rotation = result;
+        }
+    }
+    float RealAngle(Vector3 from, Vector3 to)
+    {
+        Vector3 x = Vector3.right; // se llama x porque solo tiene valores en la x, el cual es 1
+        Vector3 direction = to - from;
 
-		Quaternion currentRotation = transform.rotation;
-		Quaternion newRotation = Quaternion.Euler(0, anguloReal, 0);
-		Quaternion finalRotation = Quaternion.Slerp(currentRotation, newRotation, rotationSpeed * Time.deltaTime);
+        float angle = Vector3.Angle(x, direction);
+        Vector3 cross = Vector3.Cross(x, direction);
 
-		if (Mathf.Abs(hor) > 0.001f || Mathf.Abs(ver) > 0.001f)
-			transform.rotation = finalRotation;
-	}
-
-	float RealAngle(Vector3 from, Vector3 to)
-	{
-		Vector3 right = Vector3.right;
-
-		Vector3 dir = to - from;
-
-		float angle = Vector3.Angle(right, dir);
-		Vector3 cross = Vector3.Cross(right, dir);
-
-		if (cross.y < 0)
-		{
-			angle = 360 - angle;
-		}
-
-		return angle;
-	}
+        if (cross.y < 0)
+        {
+            angle = 360 - angle;
+        }
+        return angle;
+    }
 }

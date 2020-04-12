@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6002237651177342147}
   - component: {fileID: 808439143801088789}
   - component: {fileID: 463017921190798538}
+  - component: {fileID: -8163675265373632074}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Untagged
@@ -55,6 +56,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -92,3 +94,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8163675265373632074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851083470511149854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd7be01e641b4d49884a142508c0623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sun: {fileID: 0}
+  pos: {fileID: 0}
+  vRadius: {x: 0, y: 0, z: 0}
+  fRadius: 0
+  angle: 90
+  traslationSpeed: 0
+  rotationSpeed: 0.5
